@@ -1416,20 +1416,27 @@ CURLcode Curl_cookie_getlist(struct Curl_easy *data,
   }
 
   if(matches) {
+#define NUM_ON_STACK 16
+
     /*
      * Now we need to make sure that if there is a name appearing more than
      * once, the longest specified path version comes first. To make this the
      * swiftest way, we sort them all based on path length.
      */
     struct Cookie **array;
+    struct Cookie *arrbuf[NUM_ON_STACK];
     size_t i;
 
-    /* alloc an array and store all cookie pointers */
-    array = curlx_malloc(sizeof(struct Cookie *) * matches);
-    if(!array) {
-      result = CURLE_OUT_OF_MEMORY;
-      goto fail;
+    if(matches > NUM_ON_STACK) {
+      /* alloc an array and store all cookie pointers */
+      array = curlx_malloc(sizeof(struct Cookie *) * matches);
+      if(!array) {
+        result = CURLE_OUT_OF_MEMORY;
+        goto fail;
+      }
     }
+    else
+      array = arrbuf;
 
     n = Curl_llist_head(list);
 
@@ -1445,7 +1452,8 @@ CURLcode Curl_cookie_getlist(struct Curl_easy *data,
     for(i = 0; i < matches; i++)
       Curl_llist_append(list, array[i], &array[i]->getnode);
 
-    curlx_free(array); /* remove the temporary data again */
+    if(array != arrbuf)
+      curlx_free(array); /* remove the temporary data again */
   }
 
   *okay = TRUE;
