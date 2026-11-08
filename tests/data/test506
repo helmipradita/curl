@@ -214,11 +214,11 @@ loaded cookies:
 -----------------
   www.host.foo.com	FALSE	/	FALSE	%days[400]	test6	six_more
   .www.host.foo.com	TRUE	/	FALSE	%days[400]	test6	six
-  .host.foo.com	TRUE	/	FALSE	%days[400]	test5	five
+  .foo.com	TRUE	/	FALSE	%days[400]	test1	overwritten1
   .host.foo.com	TRUE	/	FALSE	%days[400]	test4	overwritten4
+  .host.foo.com	TRUE	/	FALSE	%days[400]	test5	five
   .foo.com	TRUE	/	FALSE	%days[400]	test3	three
   .host.foo.com	TRUE	/	FALSE	%days[400]	test2	two
-  .foo.com	TRUE	/	FALSE	%days[400]	test1	overwritten1
   .host.foo.com	TRUE	/	FALSE	%days[400]	injected	yes
 -----------------
 try SHARE_CLEANUP...
@@ -240,11 +240,11 @@ GLOBAL_CLEANUP
 
 www.host.foo.com	FALSE	/	FALSE	%days[400]	test6	six_more
 .www.host.foo.com	TRUE	/	FALSE	%days[400]	test6	six
-.host.foo.com	TRUE	/	FALSE	%days[400]	test5	five
+.foo.com	TRUE	/	FALSE	%days[400]	test1	overwritten1
 .host.foo.com	TRUE	/	FALSE	%days[400]	test4	overwritten4
+.host.foo.com	TRUE	/	FALSE	%days[400]	test5	five
 .foo.com	TRUE	/	FALSE	%days[400]	test3	three
 .host.foo.com	TRUE	/	FALSE	%days[400]	test2	two
-.foo.com	TRUE	/	FALSE	%days[400]	test1	overwritten1
 .host.foo.com	TRUE	/	FALSE	%days[400]	injected	yes
 </file>
 </verify>
