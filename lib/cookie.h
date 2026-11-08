@@ -60,7 +60,6 @@ struct CookieInfo {
   unsigned int numcookies;    /* number of cookies in the "jar" */
   unsigned int lastct;        /* last creation-time used in the jar */
   BIT(running);               /* state info, for cookie adding information */
-  BIT(newsession); /* new session, discard session cookies on load */
 };
 
 /* The maximum sizes we accept for cookies. RFC 6265 section 6.1 says
@@ -112,7 +111,6 @@ bool Curl_secure_context(struct Curl_easy *data, const char *host);
  */
 
 #define COOKIE_HTTPHEADER (1<<0) /* if HTTP header-style line */
-#define COOKIE_NOEXPIRE   (1<<1) /* skip remove_expired() */
 #define COOKIE_SECURE     (1<<2) /* connection is over secure origin */
 #define COOKIE_NOPSL      (1<<3) /* skip PSL check */
 #define COOKIE_NOSESSION  (1<<6) /* drop session cookies */

@@ -323,6 +323,10 @@ bool Curl_host_is_ipnum(const char *hostname)
 #ifdef USE_IPV6
   struct in6_addr in6;
 #endif
+  if(!hostname || !*hostname)
+    return FALSE;
+  if(!ISDIGIT(*hostname) && !strchr(hostname, ':'))
+    return FALSE;
   if(curlx_inet_pton(AF_INET, hostname, &in) > 0
 #ifdef USE_IPV6
      || curlx_inet_pton(AF_INET6, hostname, &in6) > 0
